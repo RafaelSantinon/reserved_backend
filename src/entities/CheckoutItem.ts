@@ -9,22 +9,25 @@ import {
 
 import { v4 as uuid } from 'uuid';
 
-@Entity('authorization-tokens')
-class AuthorizationToken {
+@Entity('checkout-itens')
+class CheckoutItem {
   @PrimaryColumn()
   readonly id: string;
 
   @Column()
-  idUser: string;
+  idCheckout: string;
 
   @Column()
-  type: number;
+  idMenuItem: string;
 
   @Column()
-  token: string;
+  name: string;
 
   @Column()
-  expiresIn: Date;
+  unitPrice: number;
+
+  @Column()
+  amount: number;
 
   @CreateDateColumn()
   createdAt: Date;
@@ -51,4 +54,4 @@ class AuthorizationToken {
   }
 }
 
-export { AuthorizationToken };
+export { CheckoutItem };
