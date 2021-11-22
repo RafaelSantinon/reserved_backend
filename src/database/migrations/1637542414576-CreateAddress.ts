@@ -1,10 +1,10 @@
 import { MigrationInterface, QueryRunner, Table } from 'typeorm';
 
-export class CreateAddress1637542414576 implements MigrationInterface {
+export class CreateAddresses1637542414576 implements MigrationInterface {
   public async up(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.createTable(
       new Table({
-        name: 'address',
+        name: 'addresses',
         columns: [
           {
             name: 'id',
@@ -12,12 +12,12 @@ export class CreateAddress1637542414576 implements MigrationInterface {
             isPrimary: true,
           },
           {
-            name: 'id_user',
+            name: 'idUser',
             type: 'varchar',
             isNullable: true,
           },
           {
-            name: 'id_food_store',
+            name: 'idFoodStore',
             type: 'varchar',
             isNullable: true,
           },
@@ -52,32 +52,32 @@ export class CreateAddress1637542414576 implements MigrationInterface {
             isNullable: true,
           },
           {
-            name: 'created_at',
+            name: 'createdAt',
             type: 'timestamp',
             default: 'now()',
           },
           {
-            name: 'created_by',
+            name: 'createdBy',
             type: 'string',
             isNullable: true,
           },
           {
-            name: 'updated_at',
+            name: 'updatedAt',
             type: 'timestamp',
             default: 'now()',
           },
           {
-            name: 'updated_by',
+            name: 'updatedBy',
             type: 'string',
             isNullable: true,
           },
           {
-            name: 'deleted_at',
+            name: 'deletedAt',
             type: 'timestamp',
             isNullable: true,
           },
           {
-            name: 'deleted_by',
+            name: 'deletedBy',
             type: 'string',
             isNullable: true,
           },
@@ -87,6 +87,6 @@ export class CreateAddress1637542414576 implements MigrationInterface {
   }
 
   public async down(queryRunner: QueryRunner): Promise<void> {
-    await queryRunner.dropTable('address');
+    await queryRunner.dropTable('addresses');
   }
 }

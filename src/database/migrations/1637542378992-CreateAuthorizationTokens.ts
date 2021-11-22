@@ -13,7 +13,7 @@ export class CreateAuthorizationTokens1637542378992 implements MigrationInterfac
             isPrimary: true,
           },
           {
-            name: 'id_user',
+            name: 'idUser',
             type: 'varchar',
           },
           {
@@ -25,36 +25,36 @@ export class CreateAuthorizationTokens1637542378992 implements MigrationInterfac
             type: 'varchar',
           },
           {
-            name: 'expires_in',
+            name: 'expiresIn',
             type: 'timestamp',
           },
           {
-            name: 'created_at',
-            type: 'timestamp',
-            default: 'now()',
-          },
-          {
-            name: 'created_by',
-            type: 'string',
-            isNullable: true,
-          },
-          {
-            name: 'updated_at',
+            name: 'createdAt',
             type: 'timestamp',
             default: 'now()',
           },
           {
-            name: 'updated_by',
+            name: 'createdBy',
             type: 'string',
             isNullable: true,
           },
           {
-            name: 'deleted_at',
+            name: 'updatedAt',
+            type: 'timestamp',
+            default: 'now()',
+          },
+          {
+            name: 'updatedBy',
+            type: 'string',
+            isNullable: true,
+          },
+          {
+            name: 'deletedAt',
             type: 'timestamp',
             isNullable: true,
           },
           {
-            name: 'deleted_by',
+            name: 'deletedBy',
             type: 'string',
             isNullable: true,
           },

@@ -12,11 +12,11 @@ export class CreateCheckoutItens1637542404921 implements MigrationInterface {
             isPrimary: true,
           },
           {
-            name: 'id_checkout',
+            name: 'idCheckout',
             type: 'varchar',
           },
           {
-            name: 'id_menu_item',
+            name: 'idMenuItem',
             type: 'varchar',
           },
           {
@@ -24,7 +24,7 @@ export class CreateCheckoutItens1637542404921 implements MigrationInterface {
             type: 'varchar',
           },
           {
-            name: 'unit_price',
+            name: 'unitPrice',
             type: 'float',
           },
           {
@@ -32,32 +32,32 @@ export class CreateCheckoutItens1637542404921 implements MigrationInterface {
             type: 'int',
           },
           {
-            name: 'created_at',
+            name: 'createdAt',
             type: 'timestamp',
             default: 'now()',
           },
           {
-            name: 'created_by',
+            name: 'createdBy',
             type: 'string',
             isNullable: true,
           },
           {
-            name: 'updated_at',
+            name: 'updatedAt',
             type: 'timestamp',
             default: 'now()',
           },
           {
-            name: 'updated_by',
+            name: 'updatedBy',
             type: 'string',
             isNullable: true,
           },
           {
-            name: 'deleted_at',
+            name: 'deletedAt',
             type: 'timestamp',
             isNullable: true,
           },
           {
-            name: 'deleted_by',
+            name: 'deletedBy',
             type: 'string',
             isNullable: true,
           },

@@ -12,7 +12,7 @@ export class CreateFoodStoreTables1637542449351 implements MigrationInterface {
             isPrimary: true,
           },
           {
-            name: 'id_food_store',
+            name: 'idFoodStore',
             type: 'varchar',
           },
           {
@@ -24,32 +24,32 @@ export class CreateFoodStoreTables1637542449351 implements MigrationInterface {
             type: 'int4',
           },
           {
-            name: 'created_at',
+            name: 'createdAt',
             type: 'timestamp',
             default: 'now()',
           },
           {
-            name: 'created_by',
+            name: 'createdBy',
             type: 'string',
             isNullable: true,
           },
           {
-            name: 'updated_at',
+            name: 'updatedAt',
             type: 'timestamp',
             default: 'now()',
           },
           {
-            name: 'updated_by',
+            name: 'updatedBy',
             type: 'string',
             isNullable: true,
           },
           {
-            name: 'deleted_at',
+            name: 'deletedAt',
             type: 'timestamp',
             isNullable: true,
           },
           {
-            name: 'deleted_by',
+            name: 'deletedBy',
             type: 'string',
             isNullable: true,
           },
