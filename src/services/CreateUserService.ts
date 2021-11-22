@@ -1,6 +1,8 @@
 import { getCustomRepository } from 'typeorm';
-// import { hash } from 'bcryptjs';
 import { UsersRepositories } from '@repositories/UsersRepositories';
+
+import { CreateUserCredentialService } from '@services/CreateUserCredentialService';
+
 import { User } from '@entities/User';
 
 interface IUserRequest {
@@ -9,10 +11,18 @@ interface IUserRequest {
   email: string;
   cellphone: number;
   bornAt: Date;
+  password: string;
 }
 
 class CreateUserService {
-  async execute({ type, name, email, cellphone, bornAt }: IUserRequest) {
+  async execute({
+    type,
+    name,
+    email,
+    cellphone,
+    bornAt,
+    password,
+  }: IUserRequest) {
     const usersRepository = getCustomRepository(UsersRepositories);
 
     if (!email) {
@@ -27,8 +37,6 @@ class CreateUserService {
       throw new Error('User already exists');
     }
 
-    // const passwordHash = await hash(password, 8);
-
     const user: User = usersRepository.create({
       type,
       name,
@@ -38,6 +46,13 @@ class CreateUserService {
     });
 
     await usersRepository.save(user);
+
+    await CreateUserCredentialService.execute({
+      idUser: user.id,
+      type: 1,
+      password,
+      expiresIn: new Date(2022 - 11 - 22),
+    });
 
     return user;
   }
