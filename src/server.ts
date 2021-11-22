@@ -1,4 +1,8 @@
+import 'reflect-metadata';
 import express from 'express';
+
+// eslint-disable-next-line
+import './database';
 
 const app = express();
 
