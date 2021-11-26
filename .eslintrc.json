@@ -23,6 +23,7 @@
 		"comma-dangle": "off",
 		"import/extensions": "off",
 		"import/no-unresolved": "off",
-		"object-curly-newline": "off"
+		"object-curly-newline": "off",
+		"operator-linebreak": "off"
 	}
 }

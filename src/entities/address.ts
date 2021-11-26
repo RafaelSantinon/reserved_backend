@@ -3,13 +3,17 @@ import {
   CreateDateColumn,
   DeleteDateColumn,
   Entity,
+  JoinColumn,
+  ObjectType,
+  OneToOne,
   PrimaryColumn,
   UpdateDateColumn,
 } from 'typeorm';
 
 import { v4 as uuid } from 'uuid';
+import { UserEntity } from './user';
 
-@Entity('address')
+@Entity('addresses')
 class AddressEntity {
   @PrimaryColumn()
   readonly id: string;
@@ -58,6 +62,10 @@ class AddressEntity {
 
   @Column()
   deletedBy: string;
+
+  @OneToOne((): ObjectType<UserEntity> => UserEntity, { onDelete: 'CASCADE' })
+  @JoinColumn({ name: 'idUser', referencedColumnName: 'id' })
+  public user?: UserEntity;
 
   constructor() {
     if (!this.id) {

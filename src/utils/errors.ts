@@ -1,5 +1,7 @@
 export const Errors = {
   EMAIL_INCORRECT: 'email_incorrect',
   GENERIC_ERROR: 'generic_error',
-  USER_ALREADY_EXISTS: 'User_already_exists',
+  NOT_AUTHORIZED: 'not_authorized',
+  USER_ALREADY_EXISTS: 'user_already_exists',
+  USER_NOT_FOUND: 'user_not_found',
 };

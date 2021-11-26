@@ -7,7 +7,7 @@ import { UserCredentialService } from '@services/user-credential';
 import { UserEntity } from '@entities/user';
 
 import { IUser } from '../models/interfaces';
-import { CredentialType } from '../models/enumerators';
+import { CredentialType, ProfileType, UserStatus } from '../models/enumerators';
 import { Errors } from '../utils/errors';
 
 class UserService {
@@ -42,8 +42,106 @@ class UserService {
       password,
       expiresIn: DateTime.local().plus({ years: 1 }).toJSDate(),
     });
+  }
+
+  async getMe(id: string) {
+    const userRepository = getCustomRepository(UserRepository);
+
+    return userRepository.findOne({
+      where: {
+        id,
+      },
+      relations: ['address'],
+    });
+  }
+
+  async selectById(id: string) {
+    const userRepository = getCustomRepository(UserRepository);
+
+    const user = await userRepository.findOne(id);
+
+    if (!user) throw new Error(Errors.USER_NOT_FOUND);
 
     return user;
+  }
+
+  async selectWithPagination() {
+    const userRepository = getCustomRepository(UserRepository);
+
+    const [rows, count] = await userRepository.findAndCount();
+
+    if (count === 0) throw new Error(Errors.USER_NOT_FOUND);
+
+    return { rows, count };
+  }
+
+  async updateById(userId: string, userData: IUser, actorId: string) {
+    const userRepository = getCustomRepository(UserRepository);
+
+    const user = await userRepository.findOne(userId);
+
+    if (!user) throw new Error(Errors.USER_NOT_FOUND);
+
+    const actor = await userRepository.findOne(actorId);
+
+    if (actor.type === ProfileType.USER && actor.id !== user.id) {
+      throw new Error(Errors.NOT_AUTHORIZED);
+    }
+
+    await userRepository.update(userId, {
+      name: userData.name ? userData.name : user.name,
+      email: userData.email ? userData.email : user.email,
+      cellphone: userData.cellphone ? userData.cellphone : user.cellphone,
+      updatedAt: DateTime.local().toJSDate(),
+      updatedBy: actorId,
+    });
+  }
+
+  async block(userId: string, actorId: string) {
+    const userRepository = getCustomRepository(UserRepository);
+
+    const user = await userRepository.findOne(userId);
+
+    if (!user) throw new Error(Errors.USER_NOT_FOUND);
+
+    await userRepository.update(userId, {
+      status: UserStatus.BLOCKED,
+      updatedAt: DateTime.local().toJSDate(),
+      updatedBy: actorId,
+    });
+  }
+
+  async unblock(userId: string, actorId: string) {
+    const userRepository = getCustomRepository(UserRepository);
+
+    const user = await userRepository.findOne(userId);
+
+    if (!user) throw new Error(Errors.USER_NOT_FOUND);
+
+    await userRepository.update(userId, {
+      status: UserStatus.APPROVED,
+      updatedAt: DateTime.local().toJSDate(),
+      updatedBy: actorId,
+    });
+  }
+
+  async delete(userId: string, actorId: string) {
+    const userRepository = getCustomRepository(UserRepository);
+
+    const user = await userRepository.findOne(userId);
+
+    if (!user) throw new Error(Errors.USER_NOT_FOUND);
+
+    const actor = await userRepository.findOne(actorId);
+
+    if (actor.type === ProfileType.USER && actor.id !== user.id) {
+      throw new Error(Errors.NOT_AUTHORIZED);
+    }
+
+    await userRepository.update(userId, {
+      deletedAt: DateTime.local().toJSDate(),
+      deletedBy: actorId,
+    });
   }
 }
 
