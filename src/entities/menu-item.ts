@@ -9,25 +9,22 @@ import {
 
 import { v4 as uuid } from 'uuid';
 
-@Entity('checkout-itens')
-class CheckoutItem {
+@Entity('menu-itens')
+class MenuItemEntity {
   @PrimaryColumn()
   readonly id: string;
 
   @Column()
-  idCheckout: string;
-
-  @Column()
-  idMenuItem: string;
+  idMenu: string;
 
   @Column()
   name: string;
 
   @Column()
-  unitPrice: number;
+  description: string;
 
   @Column()
-  amount: number;
+  price: number;
 
   @CreateDateColumn()
   createdAt: Date;
@@ -54,4 +51,4 @@ class CheckoutItem {
   }
 }
 
-export { CheckoutItem };
+export { MenuItemEntity };

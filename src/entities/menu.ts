@@ -9,19 +9,16 @@ import {
 
 import { v4 as uuid } from 'uuid';
 
-@Entity('food-stores')
-class FoodStore {
+@Entity('menus')
+class MenuEntity {
   @PrimaryColumn()
   readonly id: string;
 
   @Column()
-  name: string;
+  idFoodStore: string;
 
   @Column()
-  description: string;
-
-  @Column()
-  cnpj: string;
+  type: number;
 
   @CreateDateColumn()
   createdAt: Date;
@@ -48,4 +45,4 @@ class FoodStore {
   }
 }
 
-export { FoodStore };
+export { MenuEntity };

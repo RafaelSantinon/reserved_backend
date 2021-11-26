@@ -20,6 +20,9 @@
 		"prettier/prettier": "error",
 		"import/prefer-default-export": "off",
 		"class-methods-use-this": "off",
-		"comma-dangle": "off"
+		"comma-dangle": "off",
+		"import/extensions": "off",
+		"import/no-unresolved": "off",
+		"object-curly-newline": "off"
 	}
 }

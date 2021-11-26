@@ -1,14 +1,34 @@
 import 'reflect-metadata';
-import express from 'express';
+import express, { Request, Response, NextFunction } from 'express';
+import 'express-async-errors';
+
+import { Constants } from './utils/constants';
+import { routes } from './routes';
 
 // eslint-disable-next-line
 import './database';
 
 const app = express();
 
-app.get('/', (req, res) => res.json({ message: 'Hello world!' }));
+app.use(express.json());
 
-app.listen(3333, () => {
+app.use(routes);
+
+// eslint-disable-next-line no-unused-vars
+app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
+  if (err instanceof Error) {
+    return res.status(400).json({
+      error: err.message,
+    });
+  }
+
+  return res.status(500).json({
+    status: 'error',
+    message: 'Internal Server Error',
+  });
+});
+
+app.listen(Constants.port, () => {
   /* eslint-disable no-console */
-  console.log('Server is running!!');
+  console.log(`Server is running - PORT: ${Constants.port}!!!`);
 });

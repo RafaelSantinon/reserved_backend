@@ -9,8 +9,8 @@ import {
 
 import { v4 as uuid } from 'uuid';
 
-@Entity('address')
-class Address {
+@Entity('checkouts')
+class CheckoutEntity {
   @PrimaryColumn()
   readonly id: string;
 
@@ -21,25 +21,10 @@ class Address {
   idFoodStore: string;
 
   @Column()
-  state: string;
+  status: number;
 
   @Column()
-  city: string;
-
-  @Column()
-  district: string;
-
-  @Column()
-  street: string;
-
-  @Column()
-  number: number;
-
-  @Column()
-  complement: string;
-
-  @Column()
-  cep: string;
+  totalAmount: number;
 
   @CreateDateColumn()
   createdAt: Date;
@@ -66,4 +51,4 @@ class Address {
   }
 }
 
-export { Address };
+export { CheckoutEntity };

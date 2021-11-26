@@ -9,22 +9,19 @@ import {
 
 import { v4 as uuid } from 'uuid';
 
-@Entity('authorization-tokens')
-class AuthorizationToken {
+@Entity('food-store-tables')
+class FoodStoreTableEntity {
   @PrimaryColumn()
   readonly id: string;
 
   @Column()
-  idUser: string;
+  idFoodStore: string;
 
   @Column()
-  type: number;
+  number: number;
 
   @Column()
-  token: string;
-
-  @Column()
-  expiresIn: Date;
+  seats: number;
 
   @CreateDateColumn()
   createdAt: Date;
@@ -51,4 +48,4 @@ class AuthorizationToken {
   }
 }
 
-export { AuthorizationToken };
+export { FoodStoreTableEntity };
