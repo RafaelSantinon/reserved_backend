@@ -10,7 +10,7 @@ import {
 import { v4 as uuid } from 'uuid';
 
 @Entity('devices')
-class Device {
+class DeviceEntity {
   @PrimaryColumn()
   readonly id: string;
 
@@ -45,4 +45,4 @@ class Device {
   }
 }
 
-export { Device };
+export { DeviceEntity };

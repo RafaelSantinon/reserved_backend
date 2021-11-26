@@ -9,22 +9,22 @@ import {
 
 import { v4 as uuid } from 'uuid';
 
-@Entity('menu-itens')
-class MenuItem {
+@Entity('user-credentials')
+class UserCredentialEntity {
   @PrimaryColumn()
   readonly id: string;
 
   @Column()
-  idMenu: string;
+  idUser: string;
 
   @Column()
-  name: string;
+  type: number;
 
   @Column()
-  description: string;
+  credential: string;
 
   @Column()
-  price: number;
+  expiresIn: Date;
 
   @CreateDateColumn()
   createdAt: Date;
@@ -51,4 +51,4 @@ class MenuItem {
   }
 }
 
-export { MenuItem };
+export { UserCredentialEntity };

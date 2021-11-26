@@ -9,25 +9,22 @@ import {
 
 import { v4 as uuid } from 'uuid';
 
-@Entity('users')
-class User {
+@Entity('authorization-tokens')
+class AuthorizationTokenEntity {
   @PrimaryColumn()
   readonly id: string;
+
+  @Column()
+  idUser: string;
 
   @Column()
   type: number;
 
   @Column()
-  name: string;
+  token: string;
 
   @Column()
-  email: string;
-
-  @Column()
-  cellphone: number;
-
-  @Column()
-  bornAt: Date;
+  expiresIn: Date;
 
   @CreateDateColumn()
   createdAt: Date;
@@ -54,4 +51,4 @@ class User {
   }
 }
 
-export { User };
+export { AuthorizationTokenEntity };

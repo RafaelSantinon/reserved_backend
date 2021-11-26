@@ -1,5 +1,5 @@
 import 'reflect-metadata';
-import express, { Request, Response } from 'express';
+import express, { Request, Response, NextFunction } from 'express';
 import 'express-async-errors';
 
 import { Constants } from './utils/constants';
@@ -14,7 +14,8 @@ app.use(express.json());
 
 app.use(routes);
 
-app.use((err: Error, req: Request, res: Response) => {
+// eslint-disable-next-line no-unused-vars
+app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
   if (err instanceof Error) {
     return res.status(400).json({
       error: err.message,
@@ -26,8 +27,6 @@ app.use((err: Error, req: Request, res: Response) => {
     message: 'Internal Server Error',
   });
 });
-
-app.get('/', (req, res) => res.json({ message: 'Hello world!' }));
 
 app.listen(Constants.port, () => {
   /* eslint-disable no-console */

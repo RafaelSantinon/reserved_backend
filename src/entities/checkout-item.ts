@@ -9,22 +9,25 @@ import {
 
 import { v4 as uuid } from 'uuid';
 
-@Entity('user-credentials')
-class UserCredential {
+@Entity('checkout-itens')
+class CheckoutItemEntity {
   @PrimaryColumn()
   readonly id: string;
 
   @Column()
-  idUser: string;
+  idCheckout: string;
 
   @Column()
-  type: number;
+  idMenuItem: string;
 
   @Column()
-  credential: string;
+  name: string;
 
   @Column()
-  expiresIn: Date;
+  unitPrice: number;
+
+  @Column()
+  amount: number;
 
   @CreateDateColumn()
   createdAt: Date;
@@ -51,4 +54,4 @@ class UserCredential {
   }
 }
 
-export { UserCredential };
+export { CheckoutItemEntity };
