@@ -3,11 +3,14 @@ import {
   CreateDateColumn,
   DeleteDateColumn,
   Entity,
+  ObjectType,
+  OneToOne,
   PrimaryColumn,
   UpdateDateColumn,
 } from 'typeorm';
 
 import { v4 as uuid } from 'uuid';
+import { AddressEntity } from './address';
 
 @Entity('users')
 class UserEntity {
@@ -46,6 +49,15 @@ class UserEntity {
 
   @Column()
   deletedBy: string;
+
+  @Column()
+  status: number;
+
+  @OneToOne(
+    (): ObjectType<AddressEntity> => AddressEntity,
+    (address: AddressEntity): UserEntity => address.user
+  )
+  address?: AddressEntity;
 
   constructor() {
     if (!this.id) {

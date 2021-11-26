@@ -1,3 +1,5 @@
 # reserved_backend
 
-- Instalar o luxon para colocar expiração na senha
+- createdBy para criar usuário
+- filtros para busca de admin e usuários
+- impedir usuário bloqueado pelo middleware
