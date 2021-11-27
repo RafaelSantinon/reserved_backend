@@ -9,6 +9,11 @@ export interface IFoodStore {
   cnpj?: string;
 }
 
+export interface IMenu {
+  idFoodStore?: string;
+  type?: number;
+}
+
 export interface IUserCredential {
   type?: number;
   idUser?: string;

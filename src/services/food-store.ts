@@ -1,13 +1,13 @@
 import { DateTime } from 'luxon';
 import { getCustomRepository } from 'typeorm';
+
 import { FoodStoreRepository } from '@repositories/food-store';
 
 import { FoodStoreEntity } from '@entities/food-store';
 
-import { UserRepository } from '@repositories/user';
 import { IFoodStore } from '../models/interfaces';
 import { IFoodStorePagination } from '../models/paginations';
-import { ProfileType, FoodStoreStatus } from '../models/enumerators';
+import { FoodStoreStatus } from '../models/enumerators';
 import { Errors } from '../utils/errors';
 
 class FoodStoreService {
@@ -19,7 +19,7 @@ class FoodStoreService {
     });
 
     if (foodStoreAlreadyExists) {
-      throw new Error(Errors.USER_ALREADY_EXISTS);
+      throw new Error(Errors.FOOD_STORE_ALREADY_EXISTS);
     }
 
     const foodStore: FoodStoreEntity = foodStoreRepository.create({
@@ -60,20 +60,10 @@ class FoodStoreService {
     actorId: string
   ) {
     const foodStoreRepository = getCustomRepository(FoodStoreRepository);
-    const userRepository = getCustomRepository(UserRepository);
 
     const foodStore = await foodStoreRepository.findOne(foodStoreId);
 
     if (!foodStore) throw new Error(Errors.FOOD_STORE_NOT_FOUND);
-
-    const actor = await userRepository.findOne(actorId);
-
-    if (
-      actor.type === ProfileType.FOOD_STORE_ADMIN &&
-      actor.id !== foodStore.id
-    ) {
-      throw new Error(Errors.NOT_AUTHORIZED);
-    }
 
     await foodStoreRepository.update(foodStoreId, {
       name: foodStoreData.name ? foodStoreData.name : foodStore.name,
