@@ -1,8 +1,8 @@
 import { Router } from 'express';
 import { MenuController } from '@controllers/menu';
 
-import { authenticate } from '../middlewares/authenticate';
-import authorize from '../middlewares/authorize';
+import { authenticate } from './middlewares/authenticate';
+import authorize from './middlewares/authorize';
 
 import { ProfileType } from '../models/enumerators';
 
