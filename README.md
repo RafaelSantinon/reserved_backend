@@ -4,3 +4,6 @@
 - filtros para busca de admin e usuários
 - impedir usuário bloqueado pelo middleware
 - impedir restaurantes bloqueados de retornarem na busca
+- Validar se o restaurante existe para o menu
+- validar se o menu existe para o item do menu
+- price no item do menu como number ou string?

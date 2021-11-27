@@ -9,6 +9,11 @@ export enum FoodStoreStatus {
   BLOCKED = 2,
 }
 
+export enum MenuItemStatus {
+  APPROVED = 1,
+  BLOCKED = 2,
+}
+
 export enum MenuStatus {
   APPROVED = 1,
   BLOCKED = 2,

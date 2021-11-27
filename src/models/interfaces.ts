@@ -14,6 +14,13 @@ export interface IMenu {
   type?: number;
 }
 
+export interface IMenuItem {
+  idMenu?: string;
+  name?: string;
+  description?: string;
+  price?: number;
+}
+
 export interface IUserCredential {
   type?: number;
   idUser?: string;

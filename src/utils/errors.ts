@@ -4,6 +4,8 @@ export const Errors = {
   FOOD_STORE_NOT_FOUND: 'food_store_not_found',
   GENERIC_ERROR: 'generic_error',
   MENU_ALREADY_EXISTS: 'menu_already_exists',
+  MENU_ITEM_ALREADY_EXISTS: 'menu_item_already_exists',
+  MENU_ITEM_NOT_FOUND: 'menu_item_not_found',
   MENU_NOT_FOUND: 'menu_not_found',
   NOT_AUTHORIZED: 'not_authorized',
   USER_ALREADY_EXISTS: 'user_already_exists',
