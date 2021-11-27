@@ -8,3 +8,7 @@
 - validar se o menu existe para o item do menu
 - price no item do menu como number ou string?
 - Validar se o restaurante existe para a mesa
+- arrumar models
+- validação de campos
+- upload de imagens
+- ajustar erros
