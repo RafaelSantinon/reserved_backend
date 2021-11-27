@@ -9,6 +9,12 @@ export interface IFoodStore {
   cnpj?: string;
 }
 
+export interface IFoodStoreTable {
+  idFoodStore?: string;
+  number?: number;
+  seats?: number;
+}
+
 export interface IMenu {
   idFoodStore?: string;
   type?: number;

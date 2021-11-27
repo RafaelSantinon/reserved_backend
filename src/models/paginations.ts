@@ -10,6 +10,10 @@ export interface IFoodStorePagination extends IPagination {
   cnpj?: string;
 }
 
+export interface IFoodStoreTablePagination extends IPagination {
+  idFoodStore?: string;
+}
+
 export interface IMenuItemPagination extends IPagination {
   idMenu?: string;
 }
