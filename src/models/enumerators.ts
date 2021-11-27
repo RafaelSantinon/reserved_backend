@@ -4,6 +4,11 @@ export enum CredentialType {
   PASSWORD = 1,
 }
 
+export enum FoodStoreStatus {
+  APPROVED = 1,
+  BLOCKED = 2,
+}
+
 export enum ProfileType {
   ADMIN = 1,
   FOOD_STORE_ADMIN = 2,

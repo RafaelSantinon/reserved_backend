@@ -33,6 +33,7 @@ class UserService {
       email,
       cellphone,
       bornAt,
+      status: UserStatus.APPROVED,
     });
 
     await userRepository.save(user);
