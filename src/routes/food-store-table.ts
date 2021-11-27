@@ -4,7 +4,7 @@ import { FoodStoreTableController } from '@controllers/food-store-table';
 import { authenticate } from './middlewares/authenticate';
 import authorize from './middlewares/authorize';
 
-import { ProfileType } from '../models/enumerators';
+import { ProfileType } from '../utils/models/enumerators';
 
 const FoodStoreTableRoutes = Router();
 const foodStoreTableController = new FoodStoreTableController();

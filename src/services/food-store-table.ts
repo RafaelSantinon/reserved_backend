@@ -5,9 +5,9 @@ import { FoodStoreTableRepository } from '@repositories/food-store-table';
 
 import { FoodStoreTableEntity } from '@entities/food-store-table';
 
-import { IFoodStoreTable } from '../models/interfaces';
-import { IFoodStoreTablePagination } from '../models/paginations';
-import { FoodStoreTableStatus } from '../models/enumerators';
+import { IFoodStoreTable } from '../utils/models/interfaces';
+import { IFoodStoreTablePagination } from '../utils/models/paginations';
+import { FoodStoreTableStatus } from '../utils/models/enumerators';
 import { Errors } from '../utils/errors';
 
 class FoodStoreTableService {

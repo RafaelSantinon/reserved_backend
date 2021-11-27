@@ -4,7 +4,7 @@ import { MenuController } from '@controllers/menu';
 import { authenticate } from './middlewares/authenticate';
 import authorize from './middlewares/authorize';
 
-import { ProfileType } from '../models/enumerators';
+import { ProfileType } from '../utils/models/enumerators';
 
 const MenuRoutes = Router();
 const menuController = new MenuController();

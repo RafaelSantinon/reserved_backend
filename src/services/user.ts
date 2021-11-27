@@ -6,9 +6,13 @@ import { UserCredentialService } from '@services/user-credential';
 
 import { UserEntity } from '@entities/user';
 
-import { IUser } from '../models/interfaces';
-import { IUserPagination } from '../models/paginations';
-import { CredentialType, ProfileType, UserStatus } from '../models/enumerators';
+import { IUser } from '../utils/models/interfaces';
+import { IUserPagination } from '../utils/models/paginations';
+import {
+  CredentialType,
+  ProfileType,
+  UserStatus,
+} from '../utils/models/enumerators';
 import { Errors } from '../utils/errors';
 
 class UserService {
