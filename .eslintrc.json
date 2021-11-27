@@ -24,6 +24,7 @@
 		"import/extensions": "off",
 		"import/no-unresolved": "off",
 		"object-curly-newline": "off",
-		"operator-linebreak": "off"
+		"operator-linebreak": "off",
+		"no-param-reassign": "off"
 	}
 }

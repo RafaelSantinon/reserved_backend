@@ -6,53 +6,53 @@ import authorize from '../middlewares/authorize';
 
 import { ProfileType } from '../models/enumerators';
 
-const userRoutes = Router();
+const UserRoutes = Router();
 const userController = new UserController();
 
-userRoutes.post('/user', userController.create);
+UserRoutes.post('/user', userController.create);
 
-userRoutes.get('/me', authenticate, userController.getMe);
+UserRoutes.get('/me', authenticate, userController.getMe);
 
-userRoutes.get(
+UserRoutes.get(
   '/user',
   authenticate,
   authorize([ProfileType.ADMIN]),
   userController.selectWithPagination
 );
 
-userRoutes.get(
+UserRoutes.get(
   '/user/:id',
   authenticate,
   authorize([ProfileType.ADMIN]),
   userController.selectById
 );
 
-userRoutes.put(
+UserRoutes.put(
   '/user/:id',
   authenticate,
   authorize([ProfileType.ADMIN, ProfileType.USER]),
   userController.updateById
 );
 
-userRoutes.put(
+UserRoutes.put(
   '/user-block/:id',
   authenticate,
   authorize([ProfileType.ADMIN]),
   userController.block
 );
 
-userRoutes.put(
+UserRoutes.put(
   '/user-unblock/:id',
   authenticate,
   authorize([ProfileType.ADMIN]),
   userController.unblock
 );
 
-userRoutes.delete(
+UserRoutes.delete(
   '/user/:id',
   authenticate,
   authorize([ProfileType.ADMIN, ProfileType.USER]),
   userController.delete
 );
 
-export { userRoutes };
+export { UserRoutes };

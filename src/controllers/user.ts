@@ -34,7 +34,17 @@ class UserController {
   }
 
   async selectWithPagination(req: Request, res: Response) {
-    const users = await userService.selectWithPagination();
+    const searchParameter = {
+      type: req.query.type as string,
+      name: req.query.name as string,
+      email: req.query.email as string,
+      offset: parseInt(req.query.offset as string, 10) as number,
+      orderBy: req.query.orderBy as string,
+      isDESC: req.query.isDESC as string,
+      limit: parseInt(req.query.limit as string, 10) as number,
+    };
+
+    const users = await userService.selectWithPagination(searchParameter);
 
     return res.json(users);
   }
