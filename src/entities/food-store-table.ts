@@ -41,6 +41,9 @@ class FoodStoreTableEntity {
   @Column()
   deletedBy: string;
 
+  @Column()
+  status: number;
+
   constructor() {
     if (!this.id) {
       this.id = uuid();

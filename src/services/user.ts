@@ -7,6 +7,7 @@ import { UserCredentialService } from '@services/user-credential';
 import { UserEntity } from '@entities/user';
 
 import { IUser } from '../models/interfaces';
+import { IUserPagination } from '../models/paginations';
 import { CredentialType, ProfileType, UserStatus } from '../models/enumerators';
 import { Errors } from '../utils/errors';
 
@@ -32,6 +33,7 @@ class UserService {
       email,
       cellphone,
       bornAt,
+      status: UserStatus.APPROVED,
     });
 
     await userRepository.save(user);
@@ -65,10 +67,16 @@ class UserService {
     return user;
   }
 
-  async selectWithPagination() {
+  async selectWithPagination(searchParameter: IUserPagination) {
     const userRepository = getCustomRepository(UserRepository);
 
-    const [rows, count] = await userRepository.findAndCount();
+    if (searchParameter.type) {
+      searchParameter.accountTypeList = searchParameter.type.split(',');
+    }
+
+    const [rows, count] = await userRepository.selectWithPagination(
+      searchParameter
+    );
 
     if (count === 0) throw new Error(Errors.USER_NOT_FOUND);
 

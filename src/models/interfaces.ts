@@ -3,6 +3,30 @@ export interface IAuthenticate {
   password?: string;
 }
 
+export interface IFoodStore {
+  name?: string;
+  description?: string;
+  cnpj?: string;
+}
+
+export interface IFoodStoreTable {
+  idFoodStore?: string;
+  number?: number;
+  seats?: number;
+}
+
+export interface IMenu {
+  idFoodStore?: string;
+  type?: number;
+}
+
+export interface IMenuItem {
+  idMenu?: string;
+  name?: string;
+  description?: string;
+  price?: number;
+}
+
 export interface IUserCredential {
   type?: number;
   idUser?: string;

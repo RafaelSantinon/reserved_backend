@@ -1,64 +1,53 @@
 import { Request, Response } from 'express';
-import { UserService } from '@services/user';
+import { FoodStoreService } from '@services/food-store';
 
-const userService = new UserService();
+const foodStoreService = new FoodStoreService();
 
-class UserController {
+class FoodStoreController {
   async create(req: Request, res: Response) {
-    const { type, name, email, cellphone, bornAt, password } = req.body;
+    const { name, description, cnpj } = req.body;
 
-    await userService.create({
-      type,
+    await foodStoreService.create({
       name,
-      email,
-      cellphone,
-      bornAt,
-      password,
+      description,
+      cnpj,
     });
 
     return res.status(204).end();
   }
 
-  async getMe(req: Request, res: Response) {
-    const { idUser } = req;
-
-    const me = await userService.getMe(idUser);
-
-    return res.json(me);
-  }
-
   async selectById(req: Request, res: Response) {
-    const user = await userService.selectById(req.params.id);
+    const foodStore = await foodStoreService.selectById(req.params.id);
 
-    return res.json(user);
+    return res.json(foodStore);
   }
 
   async selectWithPagination(req: Request, res: Response) {
     const searchParameter = {
-      type: req.query.type as string,
       name: req.query.name as string,
-      email: req.query.email as string,
+      cnpj: req.query.cnpj as string,
       offset: parseInt(req.query.offset as string, 10) as number,
       orderBy: req.query.orderBy as string,
       isDESC: req.query.isDESC as string,
       limit: parseInt(req.query.limit as string, 10) as number,
     };
 
-    const users = await userService.selectWithPagination(searchParameter);
+    const foodStores = await foodStoreService.selectWithPagination(
+      searchParameter
+    );
 
-    return res.json(users);
+    return res.json(foodStores);
   }
 
   async updateById(req: Request, res: Response) {
-    const { name, email, cellphone } = req.body;
+    const { name, description } = req.body;
     const { idUser } = req;
 
-    await userService.updateById(
+    await foodStoreService.updateById(
       req.params.id,
       {
         name,
-        email,
-        cellphone,
+        description,
       },
       idUser
     );
@@ -69,7 +58,7 @@ class UserController {
   async block(req: Request, res: Response) {
     const { idUser } = req;
 
-    await userService.block(req.params.id, idUser);
+    await foodStoreService.block(req.params.id, idUser);
 
     return res.status(204).end();
   }
@@ -77,7 +66,7 @@ class UserController {
   async unblock(req: Request, res: Response) {
     const { idUser } = req;
 
-    await userService.unblock(req.params.id, idUser);
+    await foodStoreService.unblock(req.params.id, idUser);
 
     return res.status(204).end();
   }
@@ -85,10 +74,10 @@ class UserController {
   async delete(req: Request, res: Response) {
     const { idUser } = req;
 
-    await userService.delete(req.params.id, idUser);
+    await foodStoreService.delete(req.params.id, idUser);
 
     return res.status(204).end();
   }
 }
 
-export { UserController };
+export { FoodStoreController };
