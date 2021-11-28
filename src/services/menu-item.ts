@@ -5,9 +5,9 @@ import { MenuItemRepository } from '@repositories/menu-item';
 
 import { MenuItemEntity } from '@entities/menu-item';
 
-import { IMenuItem } from '../models/interfaces';
-import { IMenuItemPagination } from '../models/paginations';
-import { MenuItemStatus } from '../models/enumerators';
+import { IMenuItem } from '../utils/models/interfaces';
+import { IMenuItemPagination } from '../utils/models/paginations';
+import { MenuItemStatus } from '../utils/models/enumerators';
 import { Errors } from '../utils/errors';
 
 class MenuItemService {

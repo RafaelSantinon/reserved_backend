@@ -5,7 +5,7 @@ import { UserCredentialRepository } from '@repositories/user-credential';
 
 import { UserCredentialEntity } from '@entities/user-credential';
 
-import { IUserCredential } from '../models/interfaces';
+import { IUserCredential } from '../utils/models/interfaces';
 
 class UserCredentialService {
   static async create({ idUser, type, password, expiresIn }: IUserCredential) {

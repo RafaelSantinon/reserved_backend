@@ -1,5 +1,7 @@
 import 'reflect-metadata';
 import express, { Request, Response, NextFunction } from 'express';
+import cors from 'cors';
+
 import 'express-async-errors';
 
 import { Constants } from './utils/constants';
@@ -9,6 +11,8 @@ import { routes } from './routes';
 import './database';
 
 const app = express();
+
+app.use(cors());
 
 app.use(express.json());
 

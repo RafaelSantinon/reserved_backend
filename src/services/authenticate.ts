@@ -2,10 +2,10 @@ import { getCustomRepository } from 'typeorm';
 import { compare } from 'bcryptjs';
 import { sign } from 'jsonwebtoken';
 
-import { UserRepository } from '../repositories/user';
-import { UserCredentialRepository } from '../repositories/user-credential';
+import { UserRepository } from '@repositories/user';
+import { UserCredentialRepository } from '@repositories/user-credential';
 
-import { IAuthenticate } from '../models/interfaces';
+import { IAuthenticate } from '../utils/models/interfaces';
 
 class AuthenticateService {
   async login({ email, password }: IAuthenticate) {

@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction } from 'express';
 import { getCustomRepository } from 'typeorm';
 
-import { UserRepository } from '../repositories/user';
+import { UserRepository } from '@repositories/user';
 
 export default function authorize(profileTypeList: number[]) {
   return async (req: Request, res: Response, next: NextFunction) => {

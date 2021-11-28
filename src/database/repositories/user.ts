@@ -7,7 +7,7 @@ import {
 } from 'typeorm';
 import { UserEntity } from '@entities/user';
 
-import { IUserPagination } from '../models/paginations';
+import { IUserPagination } from '../../utils/models/paginations';
 
 @EntityRepository(UserEntity)
 class UserRepository extends Repository<UserEntity> {

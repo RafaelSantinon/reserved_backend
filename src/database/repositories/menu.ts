@@ -1,7 +1,7 @@
 import { EntityRepository, Repository, getRepository } from 'typeorm';
 import { MenuEntity } from '@entities/menu';
 
-import { IMenuPagination } from '../models/paginations';
+import { IMenuPagination } from '../../utils/models/paginations';
 
 @EntityRepository(MenuEntity)
 class MenuRepository extends Repository<MenuEntity> {

@@ -1,7 +1,7 @@
 import { EntityRepository, Repository, getRepository, ILike } from 'typeorm';
 import { FoodStoreEntity } from '@entities/food-store';
 
-import { IFoodStorePagination } from '../models/paginations';
+import { IFoodStorePagination } from '../../utils/models/paginations';
 
 @EntityRepository(FoodStoreEntity)
 class FoodStoreRepository extends Repository<FoodStoreEntity> {

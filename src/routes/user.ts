@@ -1,10 +1,10 @@
 import { Router } from 'express';
 import { UserController } from '@controllers/user';
 
-import { authenticate } from '../middlewares/authenticate';
-import authorize from '../middlewares/authorize';
+import { authenticate } from './middlewares/authenticate';
+import authorize from './middlewares/authorize';
 
-import { ProfileType } from '../models/enumerators';
+import { ProfileType } from '../utils/models/enumerators';
 
 const UserRoutes = Router();
 const userController = new UserController();
