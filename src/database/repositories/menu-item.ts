@@ -15,13 +15,13 @@ class MenuItemRepository extends Repository<MenuItemEntity> {
         }),
         deletedAt: null,
       },
-      ...(searchParameter.limit
-        ? { take: searchParameter.limit }
-        : { take: 10 }),
+      // ...(searchParameter.limit
+      //   ? { take: searchParameter.limit }
+      //   : { take: 10 }),
       skip: searchParameter.offset ? searchParameter.offset : 0,
       order: {
         [searchParameter.orderBy ? searchParameter.orderBy : 'createdAt']:
-          searchParameter.isDESC ? 'DESC' : 'ASC',
+          searchParameter.isDESC ? 'ASC' : 'DESC',
       },
     });
 
