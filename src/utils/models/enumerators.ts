@@ -1,5 +1,12 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-shadow */
+export enum CheckoutStatus {
+  CREATED = 1,
+  APPROVED = 2,
+  REPROVED = 3,
+  PAYED = 4,
+}
+
 export enum CredentialType {
   PASSWORD = 1,
 }

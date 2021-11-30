@@ -5,6 +5,13 @@ export interface IPagination {
   limit?: number;
 }
 
+export interface ICheckoutPagination extends IPagination {
+  idUser?: string;
+  idFoodStore?: string;
+  idFoodStoreTable?: string;
+  status?: string;
+}
+
 export interface IFoodStorePagination extends IPagination {
   name?: string;
   cnpj?: string;

@@ -3,6 +3,14 @@ export interface IAuthenticate {
   password?: string;
 }
 
+export interface ICheckout {
+  idUser?: string;
+  idFoodStore?: string;
+  idFoodStoreTable?: string;
+  status?: number;
+  totalAmount?: number;
+}
+
 export interface IFoodStore {
   name?: string;
   description?: string;

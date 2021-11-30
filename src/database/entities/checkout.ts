@@ -44,6 +44,9 @@ class CheckoutEntity {
   @Column()
   deletedBy: string;
 
+  @Column()
+  idFoodStoreTable: string;
+
   constructor() {
     if (!this.id) {
       this.id = uuid();
