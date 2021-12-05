@@ -1,18 +1,24 @@
 import { Router } from 'express';
+import multer from 'multer';
+
 import { FoodStoreController } from '@controllers/food-store';
 
 import { authenticate } from './middlewares/authenticate';
 import authorize from './middlewares/authorize';
 
+import uploadConfig from '../config/upload';
+
 import { ProfileType } from '../utils/models/enumerators';
 
 const FoodStoreRoutes = Router();
+const upload = multer(uploadConfig);
 const foodStoreController = new FoodStoreController();
 
 FoodStoreRoutes.post(
   '/food-store',
   authenticate,
   authorize([ProfileType.ADMIN]),
+  upload.single('image'),
   foodStoreController.create
 );
 

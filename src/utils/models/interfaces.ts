@@ -15,6 +15,7 @@ export interface IFoodStore {
   name?: string;
   description?: string;
   cnpj?: string;
+  pathImage?: string;
 }
 
 export interface IFoodStoreTable {

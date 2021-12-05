@@ -11,6 +11,7 @@ class FoodStoreController {
       name,
       description,
       cnpj,
+      pathImage: req.file.filename,
     });
 
     return res.status(204).end();

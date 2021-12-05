@@ -11,39 +11,18 @@ import {
 } from 'typeorm';
 
 import { v4 as uuid } from 'uuid';
-import { UserEntity } from './user';
+import { FoodStoreEntity } from './food-store';
 
-@Entity('addresses')
-class AddressEntity {
+@Entity('images')
+class ImagesEntity {
   @PrimaryColumn()
   readonly id: string;
-
-  @Column()
-  idUser: string;
 
   @Column()
   idFoodStore: string;
 
   @Column()
-  state: string;
-
-  @Column()
-  city: string;
-
-  @Column()
-  district: string;
-
-  @Column()
-  street: string;
-
-  @Column()
-  number: number;
-
-  @Column()
-  complement: string;
-
-  @Column()
-  cep: string;
+  path: string;
 
   @CreateDateColumn()
   createdAt: Date;
@@ -63,15 +42,11 @@ class AddressEntity {
   @Column()
   deletedBy: string;
 
-  @Column()
-  latitude: number;
-
-  @Column()
-  longitude: number;
-
-  @OneToOne((): ObjectType<UserEntity> => UserEntity, { onDelete: 'CASCADE' })
-  @JoinColumn({ name: 'idUser', referencedColumnName: 'id' })
-  public user?: UserEntity;
+  @OneToOne((): ObjectType<FoodStoreEntity> => FoodStoreEntity, {
+    onDelete: 'CASCADE',
+  })
+  @JoinColumn({ name: 'idFoodStore', referencedColumnName: 'id' })
+  public foodStore?: FoodStoreEntity;
 
   constructor() {
     if (!this.id) {
@@ -80,4 +55,4 @@ class AddressEntity {
   }
 }
 
-export { AddressEntity };
+export { ImagesEntity };

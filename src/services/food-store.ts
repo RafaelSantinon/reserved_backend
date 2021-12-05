@@ -2,8 +2,10 @@ import { DateTime } from 'luxon';
 import { getCustomRepository } from 'typeorm';
 
 import { FoodStoreRepository } from '@repositories/food-store';
+import { ImagesRepository } from '@repositories/image';
 
 import { FoodStoreEntity } from '@entities/food-store';
+import { ImagesEntity } from '@entities/images';
 
 import { IFoodStore } from '../utils/models/interfaces';
 import { IFoodStorePagination } from '../utils/models/paginations';
@@ -11,8 +13,9 @@ import { FoodStoreStatus } from '../utils/models/enumerators';
 import { Errors } from '../utils/errors';
 
 class FoodStoreService {
-  async create({ name, description, cnpj }: IFoodStore) {
+  async create({ name, description, cnpj, pathImage }: IFoodStore) {
     const foodStoreRepository = getCustomRepository(FoodStoreRepository);
+    const imageRepository = getCustomRepository(ImagesRepository);
 
     const foodStoreAlreadyExists = await foodStoreRepository.findOne({
       name,
@@ -30,6 +33,13 @@ class FoodStoreService {
     });
 
     await foodStoreRepository.save(foodStore);
+
+    const foodStoreImage: ImagesEntity = imageRepository.create({
+      idFoodStore: foodStore.id,
+      path: pathImage,
+    });
+
+    await imageRepository.save(foodStoreImage);
   }
 
   async selectById(id: string) {
