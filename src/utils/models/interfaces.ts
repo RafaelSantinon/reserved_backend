@@ -9,6 +9,16 @@ export interface ICheckout {
   idFoodStoreTable?: string;
   status?: number;
   totalAmount?: number;
+  reserveName?: string;
+  tableNumber?: string;
+}
+
+export interface ICheckoutItem {
+  idCheckout?: string;
+  idMenuItem?: string;
+  name?: string;
+  unitPrice?: number;
+  amount?: number;
 }
 
 export interface IFoodStore {
@@ -16,6 +26,9 @@ export interface IFoodStore {
   description?: string;
   cnpj?: string;
   pathImage?: string;
+  latitude?: string;
+  longitude?: string;
+  openHours?: string;
 }
 
 export interface IFoodStoreTable {

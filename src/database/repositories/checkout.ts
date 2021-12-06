@@ -24,6 +24,7 @@ class CheckoutRepository extends Repository<CheckoutEntity> {
         }),
         deletedAt: null,
       },
+      relations: ['foodStoreTable', 'foodStore'],
       // ...(searchParameter.limit
       //   ? { take: searchParameter.limit }
       //   : { take: 10 }),

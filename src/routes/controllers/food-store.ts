@@ -5,13 +5,16 @@ const foodStoreService = new FoodStoreService();
 
 class FoodStoreController {
   async create(req: Request, res: Response) {
-    const { name, description, cnpj } = req.body;
-
+    const { name, description, cnpj, latitude, longitude, openHours } =
+      req.body;
     await foodStoreService.create({
       name,
       description,
       cnpj,
       pathImage: req.file.filename,
+      latitude,
+      longitude,
+      openHours,
     });
 
     return res.status(204).end();

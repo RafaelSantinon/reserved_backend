@@ -12,6 +12,10 @@ export interface ICheckoutPagination extends IPagination {
   status?: string;
 }
 
+export interface ICheckoutItemPagination extends IPagination {
+  idCheckout?: string;
+}
+
 export interface IFoodStorePagination extends IPagination {
   name?: string;
   cnpj?: string;

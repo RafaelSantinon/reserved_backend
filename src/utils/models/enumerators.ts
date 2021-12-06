@@ -19,6 +19,8 @@ export enum FoodStoreStatus {
 export enum FoodStoreTableStatus {
   APPROVED = 1,
   BLOCKED = 2,
+  RESERVED = 3,
+  PENDING_CONFIRM = 4,
 }
 
 export enum MenuItemStatus {

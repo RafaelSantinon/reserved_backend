@@ -3,11 +3,18 @@ import {
   CreateDateColumn,
   DeleteDateColumn,
   Entity,
+  JoinColumn,
+  ManyToOne,
+  ObjectType,
+  OneToMany,
   PrimaryColumn,
   UpdateDateColumn,
 } from 'typeorm';
 
 import { v4 as uuid } from 'uuid';
+
+import { CheckoutEntity } from './checkout';
+import { FoodStoreEntity } from './food-store';
 
 @Entity('food-store-tables')
 class FoodStoreTableEntity {
@@ -43,6 +50,20 @@ class FoodStoreTableEntity {
 
   @Column()
   status: number;
+
+  @OneToMany(
+    (): ObjectType<CheckoutEntity> => CheckoutEntity,
+    (checkouts: CheckoutEntity): FoodStoreTableEntity =>
+      // eslint-disable-next-line implicit-arrow-linebreak
+      checkouts.foodStoreTable
+  )
+  checkouts?: CheckoutEntity;
+
+  @ManyToOne((): ObjectType<FoodStoreEntity> => FoodStoreEntity, {
+    onDelete: 'CASCADE',
+  })
+  @JoinColumn({ name: 'idFoodStore', referencedColumnName: 'id' })
+  public foodStore?: FoodStoreEntity;
 
   constructor() {
     if (!this.id) {

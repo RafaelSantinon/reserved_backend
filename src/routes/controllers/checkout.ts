@@ -5,12 +5,16 @@ const checkoutService = new CheckoutService();
 
 class CheckoutController {
   async create(req: Request, res: Response) {
-    const { idUser, idFoodStore, idFoodStoreTable } = req.body;
+    const { idFoodStore, idFoodStoreTable, reserveName, tableNumber } =
+      req.body;
+    const { idUser } = req;
 
     await checkoutService.create({
       idUser,
       idFoodStore,
       idFoodStoreTable,
+      reserveName,
+      tableNumber,
     });
 
     return res.status(204).end();
@@ -23,8 +27,10 @@ class CheckoutController {
   }
 
   async selectWithPagination(req: Request, res: Response) {
+    const { idUser } = req;
+
     const searchParameter = {
-      idUser: req.query.idUser as string,
+      idUser,
       idFoodStore: req.query.idFoodStore as string,
       idFoodStoreTable: req.query.idFoodStoreTable as string,
       status: req.query.status as string,

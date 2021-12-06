@@ -4,13 +4,18 @@ import {
   DeleteDateColumn,
   Entity,
   ObjectType,
+  OneToMany,
   OneToOne,
   PrimaryColumn,
   UpdateDateColumn,
 } from 'typeorm';
 
 import { v4 as uuid } from 'uuid';
+
 import { ImagesEntity } from './images';
+import { AddressEntity } from './address';
+import { CheckoutEntity } from './checkout';
+import { FoodStoreTableEntity } from './food-store-table';
 
 @Entity('food-stores')
 class FoodStoreEntity {
@@ -55,6 +60,28 @@ class FoodStoreEntity {
     (image: ImagesEntity): FoodStoreEntity => image.foodStore
   )
   image?: ImagesEntity;
+
+  @OneToOne(
+    (): ObjectType<AddressEntity> => AddressEntity,
+    (address: AddressEntity): FoodStoreEntity => address.foodStore
+  )
+  address?: AddressEntity;
+
+  @OneToMany(
+    (): ObjectType<CheckoutEntity> => CheckoutEntity,
+    (checkouts: CheckoutEntity): FoodStoreEntity =>
+      // eslint-disable-next-line implicit-arrow-linebreak
+      checkouts.foodStore
+  )
+  checkouts?: CheckoutEntity;
+
+  @OneToMany(
+    (): ObjectType<FoodStoreTableEntity> => FoodStoreTableEntity,
+    (foodStoreTables: FoodStoreTableEntity): FoodStoreEntity =>
+      // eslint-disable-next-line implicit-arrow-linebreak
+      foodStoreTables.foodStore
+  )
+  foodStoreTables?: FoodStoreTableEntity[];
 
   constructor() {
     if (!this.id) {

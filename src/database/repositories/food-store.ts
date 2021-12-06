@@ -18,6 +18,7 @@ class FoodStoreRepository extends Repository<FoodStoreEntity> {
         }),
         deletedAt: null,
       },
+      relations: ['address', 'image', 'foodStoreTables'],
       // ...(searchParameter.limit
       //   ? { take: searchParameter.limit }
       //   : { take: 10 }),

@@ -2,26 +2,46 @@ import { DateTime } from 'luxon';
 import { getCustomRepository } from 'typeorm';
 
 import { CheckoutRepository } from '@repositories/checkout';
+import { FoodStoreTableRepository } from '@repositories/food-store-table';
+import { UserRepository } from '@repositories/user';
 
 import { CheckoutEntity } from '@entities/checkout';
+import {
+  FoodStoreTableStatus,
+  CheckoutStatus,
+} from '../utils/models/enumerators';
 
 import { ICheckout } from '../utils/models/interfaces';
 import { ICheckoutPagination } from '../utils/models/paginations';
-import { CheckoutStatus } from '../utils/models/enumerators';
 import { Errors } from '../utils/errors';
 
 class CheckoutService {
-  async create({ idUser, idFoodStore, idFoodStoreTable }: ICheckout) {
+  async create({
+    idUser,
+    idFoodStore,
+    idFoodStoreTable,
+    reserveName,
+    tableNumber,
+  }: ICheckout) {
     const checkoutRepository = getCustomRepository(CheckoutRepository);
+    const foodStoreTableRepository = getCustomRepository(
+      FoodStoreTableRepository
+    );
 
     const checkout: CheckoutEntity = checkoutRepository.create({
       idUser,
       idFoodStore,
       idFoodStoreTable,
       status: CheckoutStatus.CREATED,
+      reserveName,
+      tableNumber,
     });
 
     await checkoutRepository.save(checkout);
+
+    await foodStoreTableRepository.update(idFoodStoreTable, {
+      status: FoodStoreTableStatus.PENDING_CONFIRM,
+    });
   }
 
   async selectById(id: string) {
@@ -36,6 +56,12 @@ class CheckoutService {
 
   async selectWithPagination(searchParameter: ICheckoutPagination) {
     const checkoutRepository = getCustomRepository(CheckoutRepository);
+    const userRepository = getCustomRepository(UserRepository);
+    if (searchParameter.idUser) {
+      const user = await userRepository.findOne(searchParameter.idUser);
+
+      if (user && user.type !== 4) searchParameter.idUser = null;
+    }
 
     const [rows, count] = await checkoutRepository.selectWithPagination(
       searchParameter

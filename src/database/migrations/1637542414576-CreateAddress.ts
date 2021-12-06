@@ -24,22 +24,27 @@ export class CreateAddresses1637542414576 implements MigrationInterface {
           {
             name: 'state',
             type: 'varchar',
+            isNullable: true,
           },
           {
             name: 'city',
             type: 'varchar',
+            isNullable: true,
           },
           {
             name: 'district',
             type: 'varchar',
+            isNullable: true,
           },
           {
             name: 'street',
             type: 'varchar',
+            isNullable: true,
           },
           {
             name: 'number',
             type: 'int4',
+            isNullable: true,
           },
           {
             name: 'complement',
@@ -49,6 +54,20 @@ export class CreateAddresses1637542414576 implements MigrationInterface {
           {
             name: 'cep',
             type: 'varchar',
+            isNullable: true,
+          },
+          {
+            name: 'latitude',
+            type: 'decimal',
+            scale: 10,
+            precision: 2,
+            isNullable: true,
+          },
+          {
+            name: 'longitude',
+            type: 'decimal',
+            scale: 10,
+            precision: 2,
             isNullable: true,
           },
           {

@@ -3,19 +3,33 @@ import { getCustomRepository } from 'typeorm';
 
 import { FoodStoreRepository } from '@repositories/food-store';
 import { ImagesRepository } from '@repositories/image';
+import { AddressRepository } from '@repositories/address';
 
 import { FoodStoreEntity } from '@entities/food-store';
 import { ImagesEntity } from '@entities/images';
+import { AddressEntity } from '@entities/address';
+import {
+  FoodStoreTableStatus,
+  FoodStoreStatus,
+} from '../utils/models/enumerators';
 
 import { IFoodStore } from '../utils/models/interfaces';
 import { IFoodStorePagination } from '../utils/models/paginations';
-import { FoodStoreStatus } from '../utils/models/enumerators';
 import { Errors } from '../utils/errors';
 
 class FoodStoreService {
-  async create({ name, description, cnpj, pathImage }: IFoodStore) {
+  async create({
+    name,
+    description,
+    cnpj,
+    pathImage,
+    latitude,
+    longitude,
+    openHours,
+  }: IFoodStore) {
     const foodStoreRepository = getCustomRepository(FoodStoreRepository);
     const imageRepository = getCustomRepository(ImagesRepository);
+    const addressRepository = getCustomRepository(AddressRepository);
 
     const foodStoreAlreadyExists = await foodStoreRepository.findOne({
       name,
@@ -30,6 +44,7 @@ class FoodStoreService {
       description,
       cnpj,
       status: FoodStoreStatus.APPROVED,
+      openHours,
     });
 
     await foodStoreRepository.save(foodStore);
@@ -40,16 +55,42 @@ class FoodStoreService {
     });
 
     await imageRepository.save(foodStoreImage);
+
+    const foodStoreAddress: AddressEntity = addressRepository.create({
+      idFoodStore: foodStore.id,
+      latitude: Number(latitude),
+      longitude: Number(longitude),
+    });
+
+    await addressRepository.save(foodStoreAddress);
   }
 
   async selectById(id: string) {
     const foodStoreRepository = getCustomRepository(FoodStoreRepository);
 
-    const foodStore = await foodStoreRepository.findOne(id);
+    const foodStore = await foodStoreRepository.findOne({
+      where: {
+        id,
+      },
+      relations: [
+        'address',
+        'image',
+        'foodStoreTables',
+        'foodStoreTables.checkouts',
+      ],
+    });
+
+    let sum = 0;
+
+    foodStore.foodStoreTables.forEach((table) => {
+      if (table.status === FoodStoreTableStatus.RESERVED) sum += 1;
+    });
+
+    const situation = (sum * 100) / foodStore.foodStoreTables.length;
 
     if (!foodStore) throw new Error(Errors.FOOD_STORE_NOT_FOUND);
 
-    return foodStore;
+    return { foodStore, situation };
   }
 
   async selectWithPagination(searchParameter: IFoodStorePagination) {
